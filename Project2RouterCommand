@@ -1,0 +1,63 @@
+Problem-2: (Experiment no 2 & 3 Combined)
+----------------------------------------------------
+Experiment Name: Design two separate networks (CSE & EEE) and connect them by two Cisco Routers. Configure RIP (RIPv1 or RIPv2) for these networks and also configure DHCP for CSE network.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+[NOTE: Set the IP Address according to your project IP assignment]
+
+
+
+Router-1:
+--------
+
+Router>enable
+Router#configure terminal
+
+Router(config)#interface FastEthernet0/0
+Router(config-if)#ip address 192.168.20.1 255.255.255.0
+Router(config-if)#no shutdown
+Router(config-if)#exit
+
+Router(config)#interface FastEthernet0/1
+Router(config-if)#ip address 192.168.10.1 255.255.255.0
+Router(config-if)#no shutdown
+Router(config-if)#exit
+
+Router(config)#router rip
+Router(config-router)#version 2
+Router(config-router)#network 192.168.10.0
+Router(config-router)#network 192.168.20.0
+Router(config-router)#network 192.168.30.0
+Router(config-router)#exit
+
+Router(config)#exit
+Router#
+
+
+
+Router-2:
+--------
+
+Router>enable
+Router#configure terminal
+
+Router(config)#interface FastEthernet0/0
+Router(config-if)#ip address 192.168.20.2 255.255.255.0
+Router(config-if)#no shutdown
+Router(config-if)#exit
+
+Router(config)#interface FastEthernet0/1
+Router(config-if)#ip address 192.168.30.1 255.255.255.0
+Router(config-if)#no shutdown
+Router(config-if)#exit
+
+Router(config)#router rip
+Router(config-router)#version 2
+Router(config-router)#network 192.168.10.0
+Router(config-router)#network 192.168.20.0
+Router(config-router)#network 192.168.30.0
+Router(config-router)#exit
+
+Router(config)#exit
+Router#
